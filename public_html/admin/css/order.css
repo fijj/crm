@@ -1,0 +1,55 @@
+body{
+    font-family: arial, sans-serif;
+    font-size: 14px;
+}
+.container {
+    margin: 0 auto;
+    width: 800px
+}
+.tg  {
+    border-collapse:collapse;border-spacing:0;
+}
+.tg td{
+    padding:2px 2px;
+    border-style:solid;
+    border-width:1px;
+    overflow:hidden;
+    word-break:normal;
+}
+.tg .tg-yw4l{
+    vertical-align:top
+}
+h1{
+    font-size: 27px
+}
+table.t2{
+    font-weight: 700
+}
+table.t3{
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+table.t3 td{
+    border-style: solid;
+    border-width: 1px;
+    padding:2px 2px;
+}
+table.t3 td.nb{
+    border-style: none;
+}
+.la{
+    text-align: left;
+}
+
+.ra{
+    text-align: right;
+}
+
+.ca{
+    text-align: center;
+}
+
+.sign{
+    background: url("img/sign.png") -120px 0px;
+    background-size: 100%;
+}

@@ -1,0 +1,227 @@
+html,
+body {
+    height: 100%;
+}
+.form-control{
+    box-shadow: none;
+    border: 1px dashed rgba(204, 204, 204, 0.8);
+}
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+
+.wrap > .container-fluid {
+    padding: 70px 15px 20px;
+}
+
+.footer {
+    height: 60px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: transparent;
+}
+
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
+}
+
+a.asc:after {
+    content: /*"\e113"*/ "\e151";
+}
+
+a.desc:after {
+    content: /*"\e114"*/ "\e152";
+}
+
+.sort-numerical a.asc:after {
+    content: "\e153";
+}
+
+.sort-numerical a.desc:after {
+    content: "\e154";
+}
+
+.sort-ordinal a.asc:after {
+    content: "\e155";
+}
+
+.sort-ordinal a.desc:after {
+    content: "\e156";
+}
+
+.grid-view th {
+    white-space: nowrap;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+.change-login{
+    margin-top: 21px;
+}
+/**CHECKBOX**/
+
+/**COMPANY**/
+.margin-top-12{
+    margin-top: 12px;
+}
+/**MANAGERS**/
+.remove-photo{
+    position: absolute;
+    right: 40px;
+    top: 85px;
+}
+/**LOGIN FORM**/
+#login-form{
+    border: 1px solid rgb(239, 239, 239);
+    padding: 58px 76px;
+}
+.login-btn{
+    width: 100%;
+}
+
+.link-name{
+    font-size: 18px;
+    color: #000000;
+    line-height: 30px;
+}
+/**ORDER TABLE**/
+table.order-table thead th, table.order-table tbody tr td{
+    text-align: center;
+    vertical-align: middle;
+}
+.order-table .form-control{
+    margin-top: 10px;
+}
+.order-table input[type="checkbox"]{
+    margin-top: 20px;
+}
+.order-file-delete{
+    margin-left: 50px;
+}
+/**MSG**/
+.alert{
+    position: fixed;
+    z-index: 100;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.3);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.3);
+    box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.3);
+    margin: 0px auto;
+    left: 40%;
+    right: 40%;
+    text-align: center;
+}
+
+/**FILE BTN**/
+.add-file_btn {
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.add-file_btn input {
+    display: none;
+}
+
+.add-file_btn label {
+    width: 70px;
+    height: 50px;
+    padding: 10px;
+    font-size: 11px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #74c5e2;
+    cursor: pointer;
+    -webkit-transition: background-color 100ms;
+    -moz-transition: background-color 100ms;
+    -ms-transition: background-color 100ms;
+    -o-transition: background-color 100ms;
+    transition: background-color 100ms;
+}
+
+.add-file_btn label:hover {
+    background-color: #324252;
+}
+label.file-in{
+    background-color: #ff5344;
+    font-size: 21px;
+}
+
+/**SORT**/
+.sort-container{
+    padding: 0 0 25px 0;
+}
+.label > a{
+    color: #ffffff;
+}
+
+/**RADIO COLOR PICKER**/
+
+#notebook-ready input[type="radio"] {
+    display: none;
+}
+
+#notebook-ready label {
+    line-height: 25px;
+    overflow: hidden;
+    color: rgba(255,255,255,0);
+    text-align: center;
+    display:inline-block;
+    float: left;
+    height: 25px;
+    width: 3%;
+    -webkit-transition: all 300ms;
+    -moz-transition: all 300ms;
+    -ms-transition: all 300ms;
+    -o-transition: all 300ms;
+    transition: all 300ms;
+}
+
+#notebook-ready input[type="radio"]:checked + label {
+    width: 94%;
+    color: rgba(255,255,255,1);
+}
+
+.company-temp{
+    padding: 5px;
+    border-radius: 100%;
+    font-size: 0px;
+    float: left;
+}
