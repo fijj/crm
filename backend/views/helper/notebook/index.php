@@ -2,6 +2,8 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
+use yii\grid\GridView;
+use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 
 $this->title = 'Записная книжка';
@@ -29,48 +31,88 @@ $this->params['breadcrumbs'][] = $this->title;
         </a>
     </div>
 </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="sort-container">
-                <span class="label label-primary"><?= $sort->link('id') ?></span>
-                <span class="label label-primary"><?= $sort->link('company') ?></span>
-                <span class="label label-primary"><?= $sort->link('type') ?></span>
-                <span class="label label-primary"><?= $sort->link('status') ?></span>
-                <span class="label label-primary"><?= $sort->link('cameFrom') ?></span>
-                <span class="label label-primary"><?= $sort->link('callBack') ?></span>
-                <span class="label label-primary"><?= $sort->link('ready') ?></span>
-                <span class="label label-primary"><?= $sort->link('managerId') ?></span>
-            </div>
-        </div>
-    </div>
-<? foreach ($model as $data): ?>
-<div class="panel panel-default">
-    <div class="panel-body">
-        <div class="col-lg-8">
-            <a class="link-name" href="<?= Url::toRoute(['/helper/notebook/view', 'id' => $data->id]); ?>"><?= $data->company ?></a>
-            <span class="company-temp" style="background-color:<?= $data->readyArr[$data->ready][0] ?>"></span>
-            <div>
-                <span class="label label-primary"><?= 'Создано: '.$data->date ?></span>
-                <span class="label label-success"><?= 'Тип: '.$data->typeArr[$data->type] ?></span>
-                <span class="label label-warning"><?= 'Статус: '.$data->statusArr[$data->status] ?></span>
-                <span class="label label-warning"><?= 'Тип контакта: '.$data->cameFromArr[$data->cameFrom] ?></span>
-                <span class="label label-default"><?= 'Менеджер: '.$managers[$data->managerId]['managerName'] ?></span>
-                <span class="label label-danger"><?= ($data->callBack) ? 'Перезвонить: '.$data->callBack : '' ?></span>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="btn-group btn-group-sm pull-right margin-top-12">
-                <a class="btn btn-primary" href="<?= Url::to(['/helper/notebook/view', 'id' => $data->id]) ?>">
-                    <span class="glyphicon glyphicon-comment"></span>
-                </a>
-                <a class="btn btn-warning" href="<?= Url::to(['/helper/notebook/edit', 'id' => $data->id]) ?>">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </a>
-                <a class="btn btn-danger" href="<?= Url::to(['/helper/notebook/remove', 'id' => $data->id]) ?>">
-                    <span class="glyphicon glyphicon-trash"></span>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-<? endforeach ?>
+<?= GridView::widget([
+    'id' => 'notebook-grid',
+    'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
+    'tableOptions' => ['class' => 'table  table-bordered table-hover'],
+    'columns' => [
+        [
+            'attribute' => 'ready',
+            'filter' => $searchModel->readyLabelArr,
+            'format' => 'html',
+            'options' => ['style' => 'width: 100px'],
+            'contentOptions' => ['style' => 'text-align:center'],
+            'label' => 'Готовность',
+            'value' => function($data){
+                    return Html::beginTag('span', ['class' => 'company-temp', 'style' => ['background-color' => $data->readyArr[$data->ready]['color']]]);
+                }
+        ],
+        [
+            'attribute' => 'company',
+            'format' => 'html',
+            'value' => function($data){
+                    return Html::a($data->company, ['helper/notebook/view', 'id' => $data->id]);
+                }
+        ],
+        [
+            'attribute' => 'city',
+            'options' => ['style' => 'width: 200px'],
+        ],
+        [
+            'attribute' => 'date',
+            'label' => 'Дата',
+            'options' => ['style' => 'width: 100px'],
+        ],
+        [
+            'attribute' => 'phone',
+            'format' => 'raw',
+            'options' => ['style' => 'width: 150px'],
+            'contentOptions' => ['style' => 'color: #C0C0C0'],
+            'value' => function($data){
+                    if($data->firstName || $data->secondName || $data->thirdName){
+                        return Html::tag('div', $data->phone, [
+                            'title' => $data->firstName.' '. $data->secondName.' '. $data->thirdName,
+                            'data-toggle' => 'tooltip',
+                            'style' => 'color: #000; cursor:pointer;'
+                        ]);
+                    }else{
+                        return $data->phone;
+                    }
+                }
+
+        ],
+        [
+            'attribute' => 'email',
+        ],
+        [
+            'attribute' => 'type',
+            'filter' => $searchModel->typeArr,
+            'value' => function($data){
+                    return $data->typeArr[$data->type];
+                },
+            'options' => ['style' => 'width: 100px'],
+        ],
+        [
+            'attribute' => 'status',
+            'filter' => $searchModel->statusArr,
+            'value' => function($data){
+                    return $data->statusArr[$data->status];
+                },
+            'options' => ['style' => 'width: 150px'],
+        ],
+        [
+            'attribute' => 'managerId',
+            'value' => 'managers.managerName',
+            'options' => ['style' => 'width: 150px'],
+        ],
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'buttons' => [
+                'view' => function ($url, $model) {
+
+                    },
+            ],
+        ]
+    ]
+]); ?>

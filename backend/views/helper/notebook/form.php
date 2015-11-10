@@ -53,7 +53,7 @@ $form = ActiveForm::begin([
                             'item' => function($index, $label, $name, $checked, $value) {
                                     ($checked) ? $checked = 'checked' : $checked;
                                     $return = '<input id="ready-radio'.$value.'" type="radio" name="' . $name . '" value="' . $value . '"'.$checked.'>';
-                                    $return .= '<label for="ready-radio'.$value.'" style="background-color: '. $label[0] .'">'.$label[1].'</label>';
+                                    $return .= '<label for="ready-radio'.$value.'" style="background-color: '. $label['color'] .'">'.$label['label'].'</label>';
                                     return $return;
                                 },
                             'class' => 'clearfix'

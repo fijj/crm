@@ -220,8 +220,17 @@ label.file-in{
 }
 
 .company-temp{
-    padding: 5px;
+    padding: 6px;
     border-radius: 100%;
     font-size: 0px;
-    float: left;
+    vertical-align: middle;
+}
+
+/**NOTEBOOK GRID**/
+#notebook-grid td{
+    vertical-align: middle;
+}
+
+.tooltip{
+    position: absolute;
 }

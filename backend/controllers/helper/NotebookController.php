@@ -65,52 +65,14 @@ class NotebookController extends Controller
 
     public function actionIndex()
     {
-        $sort = new Sort([
-            'defaultOrder' => [
-                'id' => SORT_DESC,
-            ],
-            'attributes' => [
-                'id' => [
-                    'label' => 'По порядку',
-                ],
-                'company' => [
-                    'label' => 'По компаниям',
-                ],
-                'managerId' => [
-                    'label' => 'По менеджерам',
-                ],
-                'status' => [
-                    'label' => 'По статусу',
-                ],
-                'type' => [
-                    'label' => 'По типу',
-                ],
-                'cameFrom' => [
-                    'label' => 'По типу контакта',
-                ],
-                'callBack' => [
-                    'label' => 'По дате обратного звонка',
-                ],
-                'ready' => [
-                    'label' => 'По готовности',
-                ]
-            ],
-        ]);
-
-        //заменить на RBAC в будущем
-
-        if(Yii::$app->user->identity->access > 50){
-            $model = Notebook::find()->orderBy($sort->orders)->all();
-        }else{
-            $model = Notebook::find()->where(['managerId' => Yii::$app->user->identity->managerId])->orderBy($sort->orders)->all();
-        }
-
+        $searchModel = new Notebook();
+        $dataProvider = $searchModel->searchModel(Yii::$app->request->get());
         $search = new SearchForm();
         return $this->render('index',[
-            'model' => $model,
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
             'search' => $search,
             'managers' => ArrayHelper::index(Managers::find()->asArray()->all(), 'id'),
-            'sort' => $sort
         ]);
     }
 
@@ -173,7 +135,7 @@ class NotebookController extends Controller
         ]);
     }
 
-    public function actionEdit($id)
+    public function actionUpdate($id)
     {
         $model = Notebook::findOne($id);
         $kp = new Kp();
@@ -196,7 +158,7 @@ class NotebookController extends Controller
                 $kp->save();
             }
             Yii::$app->getSession()->setFlash('success', 'Изменения сохранены');
-            return $this->redirect(['/helper/notebook/edit','id' => $id]);
+            return $this->redirect(['/helper/notebook/update','id' => $id]);
         }
 
         return $this->render('form',[
@@ -211,7 +173,7 @@ class NotebookController extends Controller
 
     //POST ACTION//
     ///////////////
-    public function actionRemove($id)
+    public function actionDelete($id)
     {
         $model = Notebook::findOne($id);
 
@@ -245,6 +207,6 @@ class NotebookController extends Controller
 
         $model->delete();
         Yii::$app->getSession()->setFlash('success', 'Файл удален');
-        return $this->redirect(['/helper/notebook/edit', 'id' => $model->companyId]);
+        return $this->redirect(['/helper/notebook/update', 'id' => $model->companyId]);
     }
 }
