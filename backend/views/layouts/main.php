@@ -53,6 +53,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Ассистент',
             'items' =>[
                 ['label' => 'Записная книжка', 'url' => ['/helper/notebook/index']],
+                ['label' => 'Звонки', 'url' => ['/helper/calls/index']],
             ],
         ];
         $menuItems[] = [

@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="well clearfix">
     <div class="btn-group btn-group-sm pull-right">
             <a class="btn btn-default" href="<?= Url::to(['/helper/notebook/new']) ?>">Создать</a>
-            <a class="btn btn-warning" href="<?= Url::to(['/helper/notebook/edit', 'id' => $model->id]) ?>">Редактировать</a>
+            <a class="btn btn-warning" href="<?= Url::to(['/helper/notebook/update', 'id' => $model->id]) ?>">Редактировать</a>
             <a class="btn btn-danger" href="<?= Url::to(['/helper/notebook/remove', 'id' => $model->id]) ?>">Удалить</a>
     </div>
 </div>
