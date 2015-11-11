@@ -127,7 +127,7 @@ class CompanyController extends Controller
 
         return $this->render('form',[
             'model' => $model,
-            'managers' => ArrayHelper::map(Managers::find()->all(),'id','managerName'),
+            'managers' => ArrayHelper::map(Managers::find()->all(),'id','fullName'),
             'action' => 'create',
             'title' => 'Создать'
         ]);
@@ -151,7 +151,7 @@ class CompanyController extends Controller
 
         return $this->render('form',[
             'model' => $model,
-            'managers' => ArrayHelper::map(Managers::find()->all(),'id','managerName'),
+            'managers' => ArrayHelper::map(Managers::find()->all(),'id','fullName'),
             'action' => 'update',
             'title' => 'Редактировать',
             'id' => $id,

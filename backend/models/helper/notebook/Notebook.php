@@ -107,7 +107,7 @@ class Notebook extends ActiveRecord
             ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', 'type', $this->type])
             ->andFilterWhere(['like', 'notebook.email', $this->email])
-            ->andFilterWhere(['like', 'managerName', $this->managerId])
+            ->andFilterWhere(['like', 'fullName', $this->managerId])
             ->andFilterWhere(['like', 'date', $this->date])
             ->andFilterWhere(['like', 'callBack', $this->callBack])
             ->andFilterWhere(['like', 'ready', $this->ready])

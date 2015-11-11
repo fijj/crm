@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = [
 ];
 if($action == "update"){
     $this->params['breadcrumbs'][] = [
-        'label' => $model->managerName,
+        'label' => $model->fullName,
         'url' => Url::to(['/managers/view', 'id' => $model->id]),
     ];
 }
@@ -33,7 +33,9 @@ $form = ActiveForm::begin([
                     <h4>Карточка менеджера</h4>
                 </div>
                 <div class="panel-body">
-                    <?= $form->field($model, 'managerName') ?>
+                    <?= $form->field($model, 'firstName') ?>
+                    <?= $form->field($model, 'secondName') ?>
+                    <?= $form->field($model, 'thirdName') ?>
                     <?= $form->field($model, 'managerPhone') ?>
                     <? if (!$model->managerPhoto):?>
                         <?= $form->field($model, 'managerPhoto')->fileInput() ?>

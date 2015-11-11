@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <? foreach ($model as $data): ?>
 <div class="panel panel-default">
     <div class="panel-body">
-        <a class="link-name" href="<?= Url::toRoute(['settings/managers/edit', 'id' => $data->id]); ?>"><?= $data->managerName ?></a>
+        <a class="link-name" href="<?= Url::toRoute(['settings/managers/edit', 'id' => $data->id]); ?>"><?= $data->fullName ?></a>
         <div class="btn-group btn-group-sm pull-right">
             <!--
             <a class="btn btn-primary" href="<?= Url::to(['settings/managers/view', 'id' => $data->id]) ?>">

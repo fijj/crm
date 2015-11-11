@@ -103,7 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         [
             'attribute' => 'managerId',
-            'value' => 'managers.managerName',
+            'value' => 'managers.firstName',
             'options' => ['style' => 'width: 150px'],
         ],
         [

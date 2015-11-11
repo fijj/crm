@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <a class="link-name" href="<?= Url::toRoute(['company/view', 'id' => $data->id]); ?>"><?= $data->fullName ?></a>
             <div>
                 <span class="label label-success"><?= 'Тип: '.$type[$data->companyParam1] ?></span>
-                <span class="label label-default"><?= 'Менеджер: '.$managers[$data->managerId]['managerName'] ?></span>
+                <span class="label label-default"><?= 'Менеджер: '.$managers[$data->managerId]['firstName'] ?></span>
             </div>
         </div>
         <div class="col-lg-4">

@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <span class="label label-default"><?= 'Создан: '.$data->date ?></span>
                 <span class="label label-warning"><?= 'Истекает: '.$data->expire ?></span>
                 <span class="label label-warning"><?= 'Статус: '.$data->statusLabel[$data->status] ?></span>
-                <span class="label label-primary"><?= 'Менеджер: '.$data->managers->managerName ?></span>
+                <span class="label label-primary"><?= 'Менеджер: '.$data->managers->firstName ?></span>
             </div>
         </div>
         <div class="col-lg-4">

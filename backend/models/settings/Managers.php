@@ -13,7 +13,7 @@ class Managers extends ActiveRecord
     ];
     public function rules(){
         return [
-            [['managerName'], 'required'],
+            [['firstName'], 'required'],
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
             ['email', 'string', 'max' => 255],
@@ -21,25 +21,28 @@ class Managers extends ActiveRecord
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
             [['managerPhoto'], 'file'],
-            [['managerPhone', 'access'], 'safe'],
+            [['managerPhone', 'access', 'secondName', 'thirdName', 'fullName'], 'safe'],
         ];
     }
 
     public function attributeLabels(){
         return [
-            'managerName' => 'Ф.И.О. ',
-            'managerPhone' => 'Телефон ',
+            'firstName' => 'Фамилия',
+            'secondName' => 'Имя',
+            'thirdName' => 'Отчество',
+            'fullName' => 'Полное имя',
+            'managerPhone' => 'Телефон',
             'email' => 'Почта ',
-            'managerPhoto' => 'Фотография ',
-            'password' => 'Пароль ',
+            'managerPhoto' => 'Фотография',
+            'password' => 'Пароль',
             'access' => 'Роль'
         ];
     }
 
     public function scenarios(){
             return [
-                'new' => ['managerName', 'email', 'password', 'managerPhone', 'managerPhoto', 'access'],
-                'edit' => ['managerName', 'managerPhone', 'access'],
+                'new' => ['firstName', 'secondName', 'thirdName', 'fullName', 'email', 'password', 'managerPhone', 'managerPhoto', 'access'],
+                'edit' => ['firstName', 'secondName', 'thirdName', 'fullName', 'managerPhone', 'access'],
                 'removePhoto' => ['managerPhoto'],
                 'access' => 'Роль'
             ];
@@ -50,7 +53,7 @@ class Managers extends ActiveRecord
         $user->username = $model->email;
         $user->managerId = $model->id;
         $user->email = $model->email;
-        $user->fullUsername = $model->managerName;
+        $user->fullUsername = $model->fullName;
         $user->role = $this->rulesArr[$model->access];
         $user->access = $model->access;
         $user->setPassword($model->password);
@@ -63,7 +66,7 @@ class Managers extends ActiveRecord
         $user->username = $model->email;
         $user->managerId = $model->id;
         $user->email = $model->email;
-        $user->fullUsername = $model->managerName;
+        $user->fullUsername = $model->fullName;
         $user->role = $this->rulesArr[$model->access];
         $user->access = $model->access;
         $user->setPassword($model->password);

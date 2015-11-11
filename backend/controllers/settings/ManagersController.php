@@ -84,6 +84,7 @@ class ManagersController extends Controller
                 $photo->saveAs('uploads/managers/' . $name);
                 $model->managerPhoto = $name;
             }
+            $model->fullName = $model->firstName.' '.$model->secondName.' '.$model->thirdName;
             $model->save();
             $model->saveUser($model);
             return $this->redirect(['/settings/managers/index']);
@@ -106,10 +107,11 @@ class ManagersController extends Controller
                 $photo->saveAs('uploads/managers/' . $name);
                 $model->managerPhoto = $name;
             }
+            $model->fullName = $model->firstName.' '.$model->secondName.' '.$model->thirdName;
             $model->save();
             $model->updateUser($model, $id);
             Yii::$app->getSession()->setFlash('success', 'Изменения сохранены');
-            return $this->redirect(['/settings/managers/edit', 'id' => $id]);
+            return $this->redirect(['/settings/managers/index']);
         }
         return $this->render('form',[
             'model' => $model,

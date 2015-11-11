@@ -196,8 +196,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="panel-body">
                         <table class="table table-hover">
                             <tr>
-                                <td><?= $manager->getAttributeLabel('managerName'); ?></td>
-                                <td><?= $manager->managerName ?></td>
+                                <td><?= $manager->getAttributeLabel('fullName'); ?></td>
+                                <td><?= $manager->fullName ?></td>
                             </tr>
                             <tr>
                                 <td><?= $manager->getAttributeLabel('managerPhone'); ?></td>

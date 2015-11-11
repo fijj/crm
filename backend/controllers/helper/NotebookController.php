@@ -131,7 +131,7 @@ class NotebookController extends Controller
             'model' => $model,
             'action' => 'create',
             'title' => 'Создать',
-            'managers' => ArrayHelper::map(Managers::find()->all(),'id','managerName'),
+            'managers' => ArrayHelper::map(Managers::find()->all(),'id','fullName'),
         ]);
     }
 
@@ -164,7 +164,7 @@ class NotebookController extends Controller
         return $this->render('form',[
             'model' => $model,
             'kp' => $kp,
-            'managers' => ArrayHelper::map(Managers::find()->all(),'id','managerName'),
+            'managers' => ArrayHelper::map(Managers::find()->all(),'id','fullName'),
             'action' => 'update',
             'title' => 'Редактировать',
             'id' => $id,
