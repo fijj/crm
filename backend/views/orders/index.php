@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
+use yii\jui\DatePicker;
 /* @var $this yii\web\View */
 
 $this->title = 'Счета';
@@ -21,7 +22,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'attribute' => 'date',
-                    'filter' => \yii\jui\DatePicker::widget(\yii\jui\DatePicker::className(), ['language' => 'ru', 'dateFormat' => 'dd-MM-yyyy'])
+                    'filter' => \yii\jui\DatePicker::widget([
+                            'language' => 'ru',
+                            'dateFormat' => 'yyyy-MM-dd',
+                            'model' => $searchModel,
+                            'attribute' => 'date',
+                            'options' =>[
+                                'class' => 'form-control'
+                            ]
+                        ]),
                 ],
                 [
                     'attribute' => 'companyId',
