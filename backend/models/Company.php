@@ -4,10 +4,22 @@ namespace backend\models;
 use Yii;
 use yii\db\ActiveRecord;
 use common\models\User;
+use backend\models\settings\Managers;
 
 
 class Company extends ActiveRecord
 {
+    public $typeArr = [
+        0 => 'частная',
+        1 => 'государственная',
+        2 => 'сервисная служба'
+    ];
+
+    public static function tableName()
+    {
+        return 'company';
+    }
+
     public function rules(){
         return [
             [['fullName'], 'required'],
@@ -120,7 +132,7 @@ class Company extends ActiveRecord
                 'managerId',
                 'city'
             ],
-            'edit' => [
+            'update' => [
                 'fullName',
                 'shortName',
                 'companyParam1',
@@ -178,6 +190,10 @@ class Company extends ActiveRecord
     public function deleteUser($id){
         $user = User::findOne(['companyId' => $id]);
         $user->delete();
+    }
+
+    public function getManagers(){
+        return $this->hasOne(Managers::className(''), ['id' => 'managerId']);
     }
 
 }

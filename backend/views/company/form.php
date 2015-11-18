@@ -32,7 +32,7 @@ $form = ActiveForm::begin([
                     <h4>Карточка предприятия</h4>
                 </div>
                 <div class="panel-body">
-                    <?= $form->field($model, 'companyParam1')->radioList(['частная', 'государственная']) ?>
+                    <?= $form->field($model, 'companyParam1')->dropDownList($model->typeArr) ?>
                     <?= $form->field($model, 'fullName') ?>
                     <?= $form->field($model, 'shortName') ?>
                     <?= $form->field($model, 'city') ?>

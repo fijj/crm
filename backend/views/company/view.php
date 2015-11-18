@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="btn-group btn-group-sm pull-right">
                 <a class="btn btn-default" href="<?= Url::to(['/orders/new', 'id' => $model->id]) ?>">Создать счет</a>
                 <a class="btn btn-default" href="<?= Url::to(['/company/new']) ?>">Создать</a>
-                <a class="btn btn-warning" href="<?= Url::to(['/company/edit', 'id' => $model->id]) ?>">Редактировать</a>
-                <a class="btn btn-danger" href="<?= Url::to(['/company/remove', 'id' => $model->id]) ?>">Удалить</a>
+                <a class="btn btn-warning" href="<?= Url::to(['/company/update', 'id' => $model->id]) ?>">Редактировать</a>
+                <a class="btn btn-danger" href="<?= Url::to(['/company/delete', 'id' => $model->id]) ?>">Удалить</a>
         </div>
     </div>
 </div>

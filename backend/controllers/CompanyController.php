@@ -6,10 +6,10 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use backend\models\Company;
+use backend\models\CompanySearch;
 use backend\models\settings\Managers;
 use yii\helpers\ArrayHelper;
 use yii\web\ForbiddenHttpException;
-use yii\data\Sort;
 
 /**
  * Site controller
@@ -30,7 +30,7 @@ class CompanyController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['index', 'view', 'new', 'edit', 'remove', 'create', 'update'],
+                        'actions' => ['index', 'view', 'new', 'edit', 'delete', 'create', 'update'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -59,44 +59,11 @@ class CompanyController extends Controller
 
     public function actionIndex()
     {
-        $sort = new Sort([
-            'defaultOrder' => [
-                'id' => SORT_DESC,
-            ],
-            'attributes' => [
-                'id' => [
-                    'label' => 'По порядку',
-                ],
-                'fullName' => [
-                    'label' => 'По компаниям',
-                ],
-                'managerId' => [
-                    'label' => 'По менеджерам',
-                ],
-                'companyParam1' => [
-                    'label' => 'По типу',
-                ]
-            ],
-        ]);
-
-        //заменить на RBAC в будущем
-
-        if(Yii::$app->user->identity->access > 50){
-            $model = Company::find()->orderBy($sort->orders)->all();
-        }else{
-            $model = Company::find()->where(['managerId' => Yii::$app->user->identity->managerId])->orderBy($sort->orders)->all();
-        }
-
-        $managers = ArrayHelper::index(Managers::find()->asArray()->all(), 'id');
+        $searchModel = new CompanySearch();
+        $dataProvider = $searchModel->searchModel(Yii::$app->request->get());
         return $this->render('index',[
-            'model' => $model,
-            'managers' => $managers,
-            'sort' => $sort,
-            'type' => [
-                '0' => 'частная',
-                '1' => 'государственная',
-                '2' => 'сервисная служба',
-            ],
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
@@ -133,7 +100,7 @@ class CompanyController extends Controller
         ]);
     }
 
-    public function actionEdit($id)
+    public function actionUpdate($id)
     {
         $model = Company::findOne($id);
         if(Yii::$app->user->identity->access < 100){
@@ -141,12 +108,12 @@ class CompanyController extends Controller
                 throw new ForbiddenHttpException('Доступ запрещен');
             }
         }
-        $model->scenario = 'edit';
+        $model->scenario = 'update';
         if($model->load(Yii::$app->request->post()) && $model->validate()){
             $model->save();
             $model->updateUser($model, $id);
             Yii::$app->getSession()->setFlash('success', 'Изменения сохранены');
-            return $this->redirect(['/company/view','id' => $id]);
+            return $this->redirect(['/company/update','id' => $id]);
         }
 
         return $this->render('form',[
@@ -160,7 +127,7 @@ class CompanyController extends Controller
 
     //POST ACTION//
     ///////////////
-    public function actionRemove($id)
+    public function actionDelete($id)
     {
         $model = Company::findOne($id);
         if(Yii::$app->user->identity->access < 100){
