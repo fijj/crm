@@ -19,7 +19,7 @@ class CompanySearch extends Company
         if(Yii::$app->user->identity->access > 50){
             $query = Company::find()->joinWith('managers');
         }else{
-            $query = Company::find()->where(['managerId' => Yii::$app->user->identity->managerId]);
+            $query = Company::find()->where(['managerId' => Yii::$app->user->identity->managerId])->joinWith('managers');
         }
 
         $dataProvider = new ActiveDataProvider([

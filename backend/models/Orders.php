@@ -13,6 +13,11 @@ class Orders extends ActiveRecord
     public $whoDeliveryLabel = ['0' => 'ОРОС Медикал', '1' => 'Завод производитель', '2' => 'Покупатель'];
     public $installmentLabel = ['0' => 'Нет', '1' => 'Да'];
 
+    public static function tableName()
+    {
+        return 'orders';
+    }
+
     public function rules(){
         return [
             [['expire'], 'required'],
@@ -65,7 +70,8 @@ class Orders extends ActiveRecord
             'comment' => 'Комменарий',
             'delivery' => 'Кто оплачивает доставку',
             'installment' => 'Рассрочка',
-            'dateOfSale' => 'Дата реализации'
+            'dateOfSale' => 'Дата реализации',
+            'companyId' => 'Компания'
         ];
     }
 

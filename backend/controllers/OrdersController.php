@@ -18,6 +18,7 @@ use backend\models\Delivery;
 use kartik\mpdf\Pdf;
 use yii\web\ForbiddenHttpException;
 use yii\data\Sort;
+use backend\models\OrdersSearch;
 /**
  * Site controller
  */
@@ -67,40 +68,11 @@ class OrdersController extends Controller
 
     public function actionIndex()
     {
-        $sort = new Sort([
-            'defaultOrder' => [
-                'id' => SORT_DESC,
-            ],
-            'attributes' => [
-                'id' => [
-                    'label' => 'По порядку',
-                ],
-                'companyId' => [
-                    'label' => 'По компаниям',
-                ],
-                'managerId' => [
-                    'label' => 'По менеджерам',
-                ],
-                'status' => [
-                    'label' => 'По статусу',
-                ],
-                'expire' => [
-                    'label' => 'По сроку действия',
-                ]
-            ],
-        ]);
-
-        //заменить на RBAC в будущем
-
-        if(Yii::$app->user->identity->access > 50){
-            $model = Orders::find()->orderBy($sort->orders)->all();
-        }else{
-            $model = Orders::find()->where(['managerId' => Yii::$app->user->identity->managerId])->orderBy($sort->orders)->all();
-        }
-
-        return $this->render('index', [
-            'model' => $model,
-            'sort' => $sort
+        $searchModel = new OrdersSearch();
+        $dataProvider = $searchModel->searchModel(Yii::$app->request->get());
+        return $this->render('index',[
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
