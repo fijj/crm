@@ -1,6 +1,17 @@
+$(window).on('scroll', function () {
+    var pos = $(this).scrollTop();
+    if (pos > 165) {
+        $('.second-nav').addClass('fixed');
+    } else {
+        $('.second-nav').removeClass('fixed');
+    }
+});
+
+//TOOLTIP
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })
+
 //TINYMCE
 tinymce.init({
     selector: ".tinymce",

@@ -14,7 +14,7 @@ body {
 }
 
 .wrap > .container-fluid {
-    padding: 70px 15px 20px;
+    padding: 20px 15px 20px;
 }
 
 .footer {
@@ -101,27 +101,50 @@ a.desc:after {
     margin-bottom: 0px;
     border: none;
 }
+.navbar-nav > li.active{
+    background-color: #EFEFEF;
+}
 .first-nav{
     height: 50px;
-    background-color: #6CBF55;
+    background-color: #EFEFEF;
     -webkit-box-shadow: 0px 10px 9px 0px rgba(50, 50, 50, 0.3);
     -moz-box-shadow:    0px 10px 9px 0px rgba(50, 50, 50, 0.3);
     box-shadow:         0px 10px 9px 0px rgba(50, 50, 50, 0.3);
 }
-.navbar.first-nav > li > a{
-    color: #ffffff;
-}
+
 .first-nav a.navbar-brand{
     font-size: 14px;
+    color: #9e9e9e;
 }
 
 .middle-bar{
- padding: 10px;
- background-color: #EFEFEF;
+    height: 115px;
+    padding: 30px;
+    background-color: #EFEFEF;
 }
-
+.second-nav-container{
+    height: 50px;
+}
 .second-nav{
     background-color: #FCFCFC;
+}
+.second-nav.fixed{
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    z-index: 100;
+    -webkit-box-shadow: 0px 10px 9px 0px rgba(50, 50, 50, 0.3);
+    -moz-box-shadow:    0px 10px 9px 0px rgba(50, 50, 50, 0.3);
+    box-shadow:         0px 10px 9px 0px rgba(50, 50, 50, 0.3);
+    -webkit-transition: all 200ms;
+    -moz-transition: all 200ms;
+    -ms-transition: all 200ms;
+    -o-transition: all 200ms;
+    transition: all 200ms;
+}
+/**BREADCRUMB**/
+.breadcrumb{
+    background-color: transparent;
 }
 /**COMPANY**/
 .margin-top-12{

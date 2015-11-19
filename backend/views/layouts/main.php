@@ -67,47 +67,40 @@ AppAsset::register($this);
             <img style="width:160px;" src="img/logo.png">
         </div>
     </div>
-
-    <?php
-    NavBar::begin([
-        'options' => [
-            'class' => 'second-nav',
-        ],
-        'innerContainerOptions' => ['class'=>'container-fluid'],
-    ]);
-    $menuItems = [
-        ['label' => 'Главная', 'url' => ['/site/index']],
-    ];
-    if (! Yii::$app->user->isGuest) {
-        $menuItems[] = [
-            'label' => 'Компании', 'url' => ['/company/index'],
-        ];
-        $menuItems[] = ['label' => 'Настройки',
-            'items' =>[
-                ['label' => 'Реквизиты', 'url' => ['/settings/details/index']],
-                ['label' => 'Менеджеры', 'url' => ['/settings/managers/index']],
+    <div class="second-nav-container">
+        <?php
+        NavBar::begin([
+            'options' => [
+                'class' => 'second-nav',
             ],
+            'innerContainerOptions' => ['class'=>'container-fluid'],
+        ]);
+        $menuItems = [
+            ['label' => 'Главная', 'url' => ['/site/index']],
         ];
-        $menuItems[] = ['label' => 'Ассистент',
-            'items' =>[
-                ['label' => 'Записная книжка', 'url' => ['/helper/notebook/index']],
-                ['label' => 'Звонки', 'url' => ['/helper/calls/index']],
-            ],
-        ];
-        $menuItems[] = [
-            'label' => 'Гарантия', 'url' => ['/warranty/index']
-        ];
-        $menuItems[] = [
-            'label' => 'Счета', 'url' => ['/orders/index'],
-        ];
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
-
+        if (! Yii::$app->user->isGuest) {
+            if ($cookies->has('mode')){
+                $menuItems[] = ['label' => 'Записная книжка', 'url' => ['/helper/notebook/index']];
+                $menuItems[] = ['label' => 'Звонки', 'url' => ['/helper/calls/index']];
+            }else{
+                $menuItems[] = ['label' => 'Компании', 'url' => ['/company/index'],];
+                $menuItems[] = ['label' => 'Гарантия', 'url' => ['/warranty/index']];
+                $menuItems[] = ['label' => 'Счета', 'url' => ['/orders/index']];
+                $menuItems[] = ['label' => 'Настройки',
+                    'items' =>[
+                        ['label' => 'Реквизиты', 'url' => ['/settings/details/index']],
+                        ['label' => 'Менеджеры', 'url' => ['/settings/managers/index']],
+                    ],
+                ];
+            }
+        }
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-right'],
+            'items' => $menuItems,
+        ]);
+        NavBar::end();
+        ?>
+    </div>
     <div class="main-body container-fluid">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
