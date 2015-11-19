@@ -20,7 +20,7 @@ class OrdersSearch extends Orders
         if(Yii::$app->user->identity->access > 50){
             $query = Orders::find()->joinWith('managers')->joinWith('company');
         }else{
-            $query = Orders::find()->where(['managerId' => Yii::$app->user->identity->managerId])->joinWith('managers')->joinWith('company');
+            $query = Orders::find()->where(['orders.managerId' => Yii::$app->user->identity->managerId])->joinWith('managers')->joinWith('company');
         }
 
         $dataProvider = new ActiveDataProvider([
