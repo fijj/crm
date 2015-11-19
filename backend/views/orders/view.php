@@ -28,8 +28,8 @@ $form = ActiveForm::begin([
         <div class="btn-group btn-group-sm pull-right">
             <a class="btn btn-default" href="<?= Url::to(['/orders/preview', 'id' => $orders->id]) ?>" target="_blank">Предварительный просмотр</a>
             <a class="btn btn-primary" href="<?= Url::to(['/orders/generate', 'id' => $orders->id]) ?>">Создать файл счета</a>
-            <a class="btn btn-warning" href="<?= Url::to(['/orders/edit', 'id' => $orders->id]) ?>">Редактировать</a>
-            <a class="btn btn-danger" href="<?= Url::to(['/orders/remove', 'id' => $orders->id]) ?>">Удалить</a>
+            <a class="btn btn-warning" href="<?= Url::to(['/orders/update', 'id' => $orders->id]) ?>">Редактировать</a>
+            <a class="btn btn-danger" href="<?= Url::to(['/orders/delete', 'id' => $orders->id]) ?>">Удалить</a>
         </div>
     </div>
     <h3>Счет №<?= $orders->orderNum ?></h3>
@@ -39,15 +39,25 @@ $form = ActiveForm::begin([
             <div class="panel panel-primary">
                 <div class="panel-heading">Счет</div>
                 <div class="panel-body">
-                    <p><b>Номер счета: </b>
-                        <mark><?= $orders->orderNum; ?></mark>
-                    </p>
-                    <p><b>Дата выставления: </b>
-                        <mark><?= $orders->date; ?></mark>
-                    </p>
-                    <p><b>Дата окончания: </b>
-                        <mark><?= $orders->expire; ?></mark>
-                    </p>
+                    <div class="col-lg-6">
+                        <p><b>Номер счета: </b>
+                            <mark><?= $orders->orderNum; ?></mark>
+                        </p>
+                        <p><b>Дата выставления: </b>
+                            <mark><?= $orders->date; ?></mark>
+                        </p>
+                        <p><b>Дата окончания: </b>
+                            <mark><?= $orders->expire; ?></mark>
+                        </p>
+                        <p><b>Прибыль: </b>
+                            <mark><?= $orders->profit; ?></mark>
+                        </p>
+                    </div>
+                    <div class="col-lg-6">
+                        <? if(Yii::$app->user->identity->access > 100): ?>
+                            <?= $form->field($orders, 'xray')->checkbox() ?>
+                        <? endif ?>
+                    </div>
                 </div>
                 <div class="panel-heading">Оплата</div>
                 <div class="panel-body">

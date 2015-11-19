@@ -95,8 +95,34 @@ a.desc:after {
 .change-login{
     margin-top: 21px;
 }
-/**CHECKBOX**/
+/**NAV**/
+.navbar {
+    border-radius: 0px;
+    margin-bottom: 0px;
+    border: none;
+}
+.first-nav{
+    height: 50px;
+    background-color: #6CBF55;
+    -webkit-box-shadow: 0px 10px 9px 0px rgba(50, 50, 50, 0.3);
+    -moz-box-shadow:    0px 10px 9px 0px rgba(50, 50, 50, 0.3);
+    box-shadow:         0px 10px 9px 0px rgba(50, 50, 50, 0.3);
+}
+.navbar.first-nav > li > a{
+    color: #ffffff;
+}
+.first-nav a.navbar-brand{
+    font-size: 14px;
+}
 
+.middle-bar{
+ padding: 10px;
+ background-color: #EFEFEF;
+}
+
+.second-nav{
+    background-color: #FCFCFC;
+}
 /**COMPANY**/
 .margin-top-12{
     margin-top: 12px;

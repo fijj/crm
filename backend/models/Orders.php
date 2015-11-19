@@ -8,7 +8,7 @@ use backend\models\Counter;
 
 class Orders extends ActiveRecord
 {
-    public $statusLabel = ['0' => 'ожидает оплату', '1' => 'предоплата', '2' => 'оплачен'];
+    public $statusLabel = ['0' => 'ожидает оплату', '1' => 'предоплата', '2' => 'оплачен', '3' => 'закрыт'];
     public $deliveryLabel = ['0' => 'ожидает оплату', '1' => 'предоплата', '2' => 'оплачен'];
     public $whoDeliveryLabel = ['0' => 'ОРОС Медикал', '1' => 'Завод производитель', '2' => 'Покупатель'];
     public $installmentLabel = ['0' => 'Нет', '1' => 'Да'];
@@ -52,7 +52,9 @@ class Orders extends ActiveRecord
                 'docRecive3',
                 'docRecive4',
                 'delivery',
-                'dateOfSale'
+                'dateOfSale',
+                'profit',
+                'xray'
             ], 'safe']
         ];
     }
@@ -71,7 +73,10 @@ class Orders extends ActiveRecord
             'delivery' => 'Кто оплачивает доставку',
             'installment' => 'Рассрочка',
             'dateOfSale' => 'Дата реализации',
-            'companyId' => 'Компания'
+            'companyId' => 'Компания',
+            'profit' => 'Прибыль',
+            'xray' => 'Рентген',
+            'managerId' => 'Менеджер'
         ];
     }
 
@@ -140,6 +145,13 @@ class Orders extends ActiveRecord
         }
 
         return $paymentsBar;
+    }
+
+    public function Profit(){
+        $purchasing = Purchasing::find()->where(['orderId' => $this->id])->sum('total');
+        $delivery = Delivery::find()->where(['orderId' => $this->id])->sum('cost');
+        $profit = $this->total - $purchasing - $delivery;
+        return $profit;
     }
 
     public function getManagers(){

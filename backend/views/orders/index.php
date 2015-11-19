@@ -16,9 +16,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'tableOptions' => ['class' => 'table  table-bordered table-hover'],
+            'rowOptions' => function ($data){
+                    if($data->status == 3){
+                        return ['style' => ['opacity' => '0.2']];
+                    }
+                },
             'columns' => [
                 [
                     'attribute' => 'orderNum',
+                    'format' => 'html',
+                    'value' => function($data){
+                            return Html::a($data->orderNum, ['orders/view', 'id' => $data->id]);
+                        },
                 ],
                 [
                     'attribute' => 'date',
@@ -41,7 +50,29 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value' => function($data){
                             return $data->statusLabel[$data->status];
                         },
-                    'filter' => $searchModel->statusLabel
+                    'filter' => $searchModel->statusLabel,
+                ],
+                [
+                    'attribute' => 'expire',
+                    'filter' => \yii\jui\DatePicker::widget([
+                            'language' => 'ru',
+                            'dateFormat' => 'yyyy-MM-dd',
+                            'model' => $searchModel,
+                            'attribute' => 'expire',
+                            'options' =>[
+                                'class' => 'form-control'
+                            ]
+                        ]),
+                ],
+                [
+                    'attribute' => 'total',
+                ],
+                [
+                    'attribute' => 'profit',
+                ],
+                [
+                    'attribute' => 'managerId',
+                    'value' => 'managers.firstName'
                 ],
                 [
                     'class' => 'yii\grid\ActionColumn',

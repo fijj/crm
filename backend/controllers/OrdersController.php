@@ -39,7 +39,7 @@ class OrdersController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['index', 'view', 'new', 'edit', 'remove', 'create', 'update', 'remove-file', 'generate', 'preview'],
+                        'actions' => ['index', 'view', 'new', 'delete', 'create', 'update', 'remove-file', 'generate', 'preview'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -122,6 +122,7 @@ class OrdersController extends Controller
             if ($valid) {
                 $transaction = \Yii::$app->db->beginTransaction();
                 try {
+
                         //Загрузка файлов
                         $orders->docFile1 = Model::uploadFile('orders/'.$orders->dir, 'Orders[docFile1]', 'Tovarnaya_nakldanaya', $orders->docFile1);
                         $orders->docFile2 = Model::uploadFile('orders/'.$orders->dir, 'Orders[docFile2]', 'Schet_faktura', $orders->docFile2);
@@ -204,6 +205,10 @@ class OrdersController extends Controller
                                 break;
                             }
                         }
+
+                        //Расчет прибыли
+                        $orders->profit = $orders->Profit();
+                        $orders->update();
                     }
                     if ($flag) {
                         $transaction->commit();
@@ -304,7 +309,7 @@ class OrdersController extends Controller
         ]);
     }
 
-    public function actionEdit($id)
+    public function actionUpdate($id)
     {
         $modelOrders = Orders::findOne($id);
         if(Yii::$app->user->identity->access < 100){
@@ -430,7 +435,7 @@ class OrdersController extends Controller
     //POST ACTION//
     ///////////////
 
-    public function actionRemove($id)
+    public function actionDelete($id)
     {
         $orders = Orders::findOne($id);
         if(Yii::$app->user->identity->access < 100){

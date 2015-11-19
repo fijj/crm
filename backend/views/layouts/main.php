@@ -9,6 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
+use backend\models\settings\Managers;
 
 AppAsset::register($this);
 ?>
@@ -23,24 +24,61 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
-<?php $this->beginBody() ?>
-
 <div class="wrap">
+<?php $this->beginBody() ?>
+    <?php
+    // получение коллекции кук
+    $cookies = Yii::$app->request->cookies;
+
+    NavBar::begin([
+        'brandLabel' => 'Здравствуйте, '.Managers::findOne(Yii::$app->user->identity->managerId)->secondName,
+        'options' => [
+            'class' => 'first-nav',
+        ],
+        'innerContainerOptions' => ['class'=>'container-fluid'],
+    ]);
+    if (Yii::$app->user->isGuest) {
+        $menuItems[] = ['label' => 'Вход', 'url' => ['/site/login']];
+    } else {
+        if ($cookies->has('mode')){
+            $menuItems[] = [
+                'label' => 'Режим(CRM)', 'url' => ['/site/unset-mode'],
+            ];
+        }else{
+            $menuItems[] = [
+                'label' => 'Режим(Документы)', 'url' => ['/site/set-mode'],
+            ];
+        }
+        $menuItems[] = [
+            'label' => 'Выход (' . Yii::$app->user->identity->username . ')',
+            'url' => ['/site/logout'],
+            'linkOptions' => ['data-method' => 'post']
+        ];
+    }
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => $menuItems,
+    ]);
+    NavBar::end();
+    ?>
+
+    <div class="middle-bar">
+        <div class="container-fluid2">
+            <img style="width:160px;" src="img/logo.png">
+        </div>
+    </div>
+
     <?php
     NavBar::begin([
-        'brandLabel' => 'ОРОСМедикал CRM',
-        'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'second-nav',
         ],
         'innerContainerOptions' => ['class'=>'container-fluid'],
     ]);
     $menuItems = [
         ['label' => 'Главная', 'url' => ['/site/index']],
     ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Вход', 'url' => ['/site/login']];
-    } else {
+    if (! Yii::$app->user->isGuest) {
         $menuItems[] = [
             'label' => 'Компании', 'url' => ['/company/index'],
         ];
@@ -61,11 +99,6 @@ AppAsset::register($this);
         ];
         $menuItems[] = [
             'label' => 'Счета', 'url' => ['/orders/index'],
-        ];
-        $menuItems[] = [
-            'label' => 'Выход (' . Yii::$app->user->identity->username . ')',
-            'url' => ['/site/logout'],
-            'linkOptions' => ['data-method' => 'post']
         ];
     }
     echo Nav::widget([

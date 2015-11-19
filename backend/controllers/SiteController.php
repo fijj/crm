@@ -26,7 +26,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index', 'set-mode', 'unset-mode'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -78,6 +78,21 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
 
+        return $this->goHome();
+    }
+
+    public function actionSetMode(){
+        $cookies = Yii::$app->response->cookies;
+        $cookies->add(new \yii\web\Cookie([
+            'name' => 'mode',
+            'value' => '1',
+        ]));
+        return $this->goHome();
+    }
+
+    public function actionUnsetMode(){
+        $cookies = Yii::$app->response->cookies;
+        $cookies->remove('mode');
         return $this->goHome();
     }
 }
