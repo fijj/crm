@@ -87,29 +87,7 @@ class NotebookController extends Controller
 
     public function actionView($id)
     {
-        $model = Notebook::findOne($id);
 
-        if(Yii::$app->user->identity->access < 100){
-            if($model->managerId != Yii::$app->user->identity->managerId){
-                throw new ForbiddenHttpException('Доступ запрещен');
-            }
-        }
-
-        $historyModel = new History();
-        $history = History::find()->where(['notebookId' => $id])->orderBy(['date' => SORT_DESC, 'time' => SORT_DESC])->all();
-        if($historyModel->load(Yii::$app->request->post()) && $historyModel->validate()){
-            $historyModel->notebookId = $id;
-            $historyModel->date = date('Y-m-d');
-            $historyModel->time = date('H:i:s');
-            $historyModel->save();
-            return $this->redirect(['/helper/notebook/view','id' => $id]);
-        }
-        return $this->render('view',[
-            'model' => $model,
-            'historyModel' => $historyModel,
-            'history' => $history,
-            'manager' => Managers::findOne($model->managerId),
-        ]);
     }
 
     public function actionNew()
@@ -137,9 +115,21 @@ class NotebookController extends Controller
 
     public function actionUpdate($id)
     {
+        //Модель истории общения с клиентом
+        $historyModel = new History();
+        $history = History::find()->where(['notebookId' => $id])->orderBy(['date' => SORT_DESC, 'time' => SORT_DESC])->all();
+        if($historyModel->load(Yii::$app->request->post()) && $historyModel->validate()){
+            $historyModel->notebookId = $id;
+            $historyModel->date = date('Y-m-d');
+            $historyModel->time = date('H:i:s');
+            $historyModel->save();
+            Yii::$app->getSession()->setFlash('success', 'Запись добавлена');
+            return $this->redirect(['/helper/notebook/update','id' => $id]);
+        }
+
+        //Модель карточки клиента
         $model = Notebook::findOne($id);
         $kp = new Kp();
-
         if(Yii::$app->user->identity->access < 100){
             if($model->managerId != Yii::$app->user->identity->managerId){
                 throw new ForbiddenHttpException('Доступ запрещен');
@@ -164,6 +154,8 @@ class NotebookController extends Controller
         return $this->render('form',[
             'model' => $model,
             'kp' => $kp,
+            'historyModel' =>$historyModel,
+            'history' => $history,
             'managers' => ArrayHelper::map(Managers::find()->all(),'id','fullName'),
             'action' => 'update',
             'title' => 'Редактировать',

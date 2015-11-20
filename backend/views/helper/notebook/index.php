@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'attribute' => 'company',
             'format' => 'html',
             'value' => function($data){
-                    return Html::a($data->company, ['helper/notebook/view', 'id' => $data->id]);
+                    return Html::a($data->company, ['helper/notebook/update', 'id' => $data->id]);
                 }
         ],
         [
