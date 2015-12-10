@@ -22,7 +22,7 @@ use yii\helpers\Url;
             <tr>
                 <td class="tg-yw4l" colspan="2" rowspan="2">Банк получателя<br /> <?= $details->detailsParam12 ?></td>
                 <td class="tg-yw4l">БИК</td>
-                <td class="tg-yw4l" rowspan="2"><?= $details->detailsParam15 ?><br /><br /><?= $details->detailsParam13 ?></td>
+                <td class="tg-yw4l" rowspan="2"><?= $details->detailsParam15 ?><br /><br /><?= $details->detailsParam14 ?></td>
             </tr>
             <tr>
                 <td class="tg-yw4l">Сч. №</td>
