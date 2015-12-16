@@ -61,7 +61,7 @@ use yii\helpers\Url;
                 <td class="nb"></td>
                 <td class="nb"></td>
                 <td class="nb ra"><b>Итого:</b></td>
-                <td class="ra"><?= $order->total ?></td>
+                <td class="ra"><?= Yii::$app->formatter->asDecimal($order->total, 2) ?></td>
             </tr>
             <tr>
                 <td class="nb"></td>
@@ -69,7 +69,7 @@ use yii\helpers\Url;
                 <td class="nb"></td>
                 <td class="nb"></td>
                 <td class="nb ra"><b>Итого НДС:</b></td>
-                <td class="ra"><?= $order->tax ?></td>
+                <td class="ra"><?= Yii::$app->formatter->asDecimal($order->tax, 2) ?></td>
             </tr>
             <tr>
                 <td class="nb"></td>
@@ -77,7 +77,7 @@ use yii\helpers\Url;
                 <td class="nb"></td>
                 <td class="nb"></td>
                 <td class="nb ra"><b>Всего к оплате:</b></td>
-                <td class="ra"><?= $order->total ?></td>
+                <td class="ra"><?= Yii::$app->formatter->asDecimal($order->total, 2) ?></td>
             </tr>
             <tr>
                 <? if ($empty): ?>
@@ -85,7 +85,7 @@ use yii\helpers\Url;
                 <? else: ?>
                     <td colspan="6" class="nb sign">
                 <? endif ?>
-                    <p>Всего наименований <?= count($order->goods) ?>, на сумму <?= $order->total ?></p><br />
+                    <p>Всего наименований <?= count($order->goods) ?>, на сумму <?= Yii::$app->formatter->asDecimal($order->total, 2) ?></p><br />
                     <p>Руководитель предприятия_____________________________________(<?= $details->detailsParam11 ?>)</p><br />
                     <p>Главный бухгалтер_____________________________________________(<?= $details->detailsParam18 ?>)</p><br /><br /><br /><br /><br /><br /><br />
                 </td>
@@ -98,8 +98,8 @@ use yii\helpers\Url;
                     <td><?= $item->name ?></td>
                     <td class="ca"><?= $item->unitArr[$item->unit] ?></td>
                     <td class="ra"><?= $item->quantity ?></td>
-                    <td class="ra"><?= $item->cost ?></td>
-                    <td class="ra"><?= $item->total ?></td>
+                    <td class="ra"><?= Yii::$app->formatter->asDecimal($item->cost, 2) ?></td>
+                    <td class="ra"><?= Yii::$app->formatter->asDecimal($item->total, 2) ?></td>
                 </tr>
             <? endforeach ?>
             </tbody>

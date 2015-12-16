@@ -65,9 +65,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]),
                 ],
                 [
+                    'format' => 'decimal',
                     'attribute' => 'total',
                 ],
                 [
+                    'format' => 'decimal',
                     'attribute' => 'profit',
                 ],
                 [

@@ -6,6 +6,11 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'K3iNZ2anVUzb9UmzMxXjUpz_1_9tWNAt',
         ],
+        'formatter' => [
+            'class' => 'yii\i18n\Formatter',
+            'thousandSeparator' => ' ',
+            'decimalSeparator' => ','
+        ]
     ],
 ];
 

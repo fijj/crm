@@ -51,7 +51,7 @@ $form = ActiveForm::begin([
                             <mark><?= $orders->expire; ?></mark>
                         </p>
                         <p><b>Прибыль: </b>
-                            <mark><?= $orders->profit; ?></mark>
+                            <mark><?= Yii::$app->formatter->asDecimal($orders->profit, 2) ?></mark>
                         </p>
                     </div>
                     <div class="col-lg-6">
@@ -64,11 +64,11 @@ $form = ActiveForm::begin([
                 <div class="panel-body">
                     <p>
                         <b>Оплачено: </b>
-                        <mark><?= $paymentsBar['total']; ?></mark>
+                        <mark><?= Yii::$app->formatter->asDecimal($paymentsBar['total'], 2) ?></mark>
                         <b>Полная стоимость: </b>
-                        <mark><?= $orders->total; ?></mark>
+                        <mark><?= Yii::$app->formatter->asDecimal($orders->total, 2) ?></mark>
                         <b>В том числе НДС: </b>
-                        <mark><?= $orders->tax; ?></mark>
+                        <mark><?= Yii::$app->formatter->asDecimal($orders->tax, 2) ?></mark>
                     </p>
                     <br/>
 
