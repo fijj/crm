@@ -36,7 +36,7 @@ class NotebookController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['index', 'view', 'new', 'edit', 'remove', 'create', 'update', 'search', 'remove-file'],
+                        'actions' => ['index', 'view', 'new', 'update', 'remove', 'create', 'delete', 'search', 'remove-file'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
