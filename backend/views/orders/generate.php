@@ -80,7 +80,11 @@ use yii\helpers\Url;
                 <td class="ra"><?= $order->total ?></td>
             </tr>
             <tr>
-                <td colspan="6" class="nb sign">
+                <? if ($empty): ?>
+                    <td colspan="6" class="nb">
+                <? else: ?>
+                    <td colspan="6" class="nb sign">
+                <? endif ?>
                     <p>Всего наименований <?= count($order->goods) ?>, на сумму <?= $order->total ?></p><br />
                     <p>Руководитель предприятия_____________________________________(<?= $details->detailsParam11 ?>)</p><br />
                     <p>Главный бухгалтер_____________________________________________(<?= $details->detailsParam18 ?>)</p><br /><br /><br /><br /><br /><br /><br />

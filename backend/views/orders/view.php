@@ -27,6 +27,7 @@ $form = ActiveForm::begin([
     <div class="well clearfix">
         <div class="btn-group btn-group-sm pull-right">
             <a class="btn btn-default" href="<?= Url::to(['/orders/preview', 'id' => $orders->id]) ?>" target="_blank">Предварительный просмотр</a>
+            <a class="btn btn-default" href="<?= Url::to(['/orders/preview', 'id' => $orders->id, 'empty' => true]) ?>" target="_blank">Просмотр без печати</a>
             <a class="btn btn-primary" href="<?= Url::to(['/orders/generate', 'id' => $orders->id]) ?>">Создать файл счета</a>
             <a class="btn btn-warning" href="<?= Url::to(['/orders/update', 'id' => $orders->id]) ?>">Редактировать</a>
             <a class="btn btn-danger" href="<?= Url::to(['/orders/delete', 'id' => $orders->id]) ?>">Удалить</a>

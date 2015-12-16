@@ -402,7 +402,7 @@ class OrdersController extends Controller
         return $this->redirect(['/orders/view', 'id' => $id]);
     }
 
-    public function actionPreview($id){
+    public function actionPreview($id, $empty = false){
         $order = Orders::findOne($id);
         if(Yii::$app->user->identity->access < 100){
             if($order->managerId != Yii::$app->user->identity->managerId){
@@ -417,7 +417,8 @@ class OrdersController extends Controller
 
         $content = $this->renderPartial('generate', [
             'order' => $order,
-            'details' => $details
+            'details' => $details,
+            'empty' => $empty
         ]);
 
         $pdf = new Pdf([
