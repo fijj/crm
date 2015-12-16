@@ -79,6 +79,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             <td><?= $model->getAttributeLabel('companyParam8'); ?></td>
                             <td><?= $model->companyParam8 ?></td>
                         </tr>
+                        <tr>
+                            <td><?= $model->getAttributeLabel('companyParam10'); ?></td>
+                            <td><?= $model->companyParam10 ?></td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -91,10 +95,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         <tr>
                             <td><?= $model->getAttributeLabel('companyParam9'); ?></td>
                             <td><?= $model->companyParam9 ?></td>
-                        </tr>
-                        <tr>
-                            <td><?= $model->getAttributeLabel('companyParam10'); ?></td>
-                            <td><?= $model->companyParam10 ?></td>
                         </tr>
                         <tr>
                             <td><?= $model->getAttributeLabel('companyParam11'); ?></td>

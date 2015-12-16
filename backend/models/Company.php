@@ -76,7 +76,7 @@ class Company extends ActiveRecord
             'companyParam7' => 'Почтовый адрес ',
             'companyParam8' => 'Генеральный директор ',
             'companyParam9' => 'Наименование банка ',
-            'companyParam10' => 'Расчетный счет банка ',
+            'companyParam10' => 'Расчетный счет компании ',
             'companyParam11' => 'Корреспондентский счет банка ',
             'companyParam12' => 'БИК банка ',
             'companyParam13' => 'Имя ',

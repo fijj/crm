@@ -43,6 +43,7 @@ $form = ActiveForm::begin([
                     <?= $form->field($model, 'companyParam6') ?>
                     <?= $form->field($model, 'companyParam7') ?>
                     <?= $form->field($model, 'companyParam8') ?>
+                    <?= $form->field($model, 'companyParam10') ?>
                 </div>
             </div>
         </div>
@@ -53,7 +54,6 @@ $form = ActiveForm::begin([
                 </div>
                 <div class="panel-body">
                     <?= $form->field($model, 'companyParam9') ?>
-                    <?= $form->field($model, 'companyParam10') ?>
                     <?= $form->field($model, 'companyParam11') ?>
                     <?= $form->field($model, 'companyParam12') ?>
                 </div>
