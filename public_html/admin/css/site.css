@@ -211,6 +211,23 @@ a.desc:after {
     color: #000000;
     line-height: 30px;
 }
+
+/**COMPANY PAGE**/
+.order-goods-table{
+    width: 50%;
+}
+.order-goods-table td:first-child{
+    width: 50%;
+}
+.order-goods-table td:last-child{
+    width: 40%;
+}
+.order-head-row{
+    background-color: #e1e1e1;
+}
+.order-goods-row{
+    font-size: 11px;
+}
 /**ORDER TABLE**/
 table.order-table thead th, table.order-table tbody tr td{
     text-align: center;

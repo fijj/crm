@@ -196,4 +196,8 @@ class Company extends ActiveRecord
         return $this->hasOne(Managers::className(''), ['id' => 'managerId']);
     }
 
+    public function getOrders(){
+        return $this->hasMany(Orders::className(''), ['companyId' => 'id'])->orderBy(['date' => SORT_DESC]);
+    }
+
 }

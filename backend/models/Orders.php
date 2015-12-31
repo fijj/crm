@@ -158,4 +158,12 @@ class Orders extends ActiveRecord
         return $this->hasOne(Managers::className(''), ['id' => 'managerId']);
     }
 
+    public function payments(){
+        return Payments::find()->where(['orderId' => $this->id, 'status' => 1])->sum('sum');
+    }
+
+    public function goods(){
+        return Goods::find()->where(['orderId' => $this->id])->all();
+    }
+
 }
