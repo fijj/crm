@@ -86,6 +86,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'attribute' => 'email',
         ],
         [
+            'attribute' => 'category',
+            'filter' => $searchModel->categoryArr,
+            'value' => function($data){
+                    return $data->categoryArr[$data->category];
+                },
+            'options' => ['style' => 'width: 100px'],
+        ],
+        [
             'attribute' => 'type',
             'filter' => $searchModel->typeArr,
             'value' => function($data){

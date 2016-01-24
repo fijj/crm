@@ -50,6 +50,9 @@ $form = ActiveForm::begin([
                             <?= $form->field($model, 'cameFrom')->dropDownList($model->cameFromArr) ?>
                         </div>
                         <div class="col-lg-4">
+                            <?= $form->field($model, 'category')->dropDownList($model->categoryArr) ?>
+                        </div>
+                        <div class="col-lg-4">
                             <?= $form->field($model, 'status')->dropDownList($model->statusArr) ?>
                         </div>
                     </div>

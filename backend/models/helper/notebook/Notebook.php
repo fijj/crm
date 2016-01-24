@@ -16,6 +16,20 @@ class Notebook extends ActiveRecord
         3 => 'перекупщики',
     ];
 
+    public $categoryArr = [
+        0 => 'Рентгенография и томография',
+        1 => 'Диагностическое оборудование',
+        2 => 'Гинекология и акушерство',
+        3 => 'Лабораторное оборудование',
+        4 => 'Оборудования для операционных',
+        5 => 'Медицинская мебель',
+        6 => 'Стоматологическое оборудование',
+        7 => 'Анестезиология и реанимация',
+        8 => 'Ветеринарное оборудование',
+        9 => 'Расходные материалы'
+
+    ];
+
     public $cameFromArr = [
         0 => 'исходящий звонок',
         1 => 'входящий звонок',
@@ -69,8 +83,8 @@ class Notebook extends ActiveRecord
 
     public function scenarios(){
         return[
-            'default' => ['company', 'type', 'city', 'position', 'email', 'firstName', 'secondName', 'thirdName', 'phone', 'comment', 'date', 'callBack', 'ready', 'cameFrom', 'status', 'managerId'],
-            'filter' => ['company', 'type', 'city', 'email', 'phone', 'date', 'callBack', 'ready', 'cameFrom', 'status', 'ready', 'managerId']
+            'default' => ['company', 'type', 'city', 'position', 'email', 'firstName', 'secondName', 'thirdName', 'phone', 'comment', 'date', 'callBack', 'ready', 'cameFrom', 'status', 'managerId', 'category'],
+            'filter' => ['company', 'type', 'city', 'email', 'phone', 'date', 'callBack', 'ready', 'cameFrom', 'status', 'ready', 'managerId', 'category']
         ];
     }
 
@@ -113,7 +127,8 @@ class Notebook extends ActiveRecord
             ->andFilterWhere(['like', 'callBack', $this->callBack])
             ->andFilterWhere(['like', 'ready', $this->ready])
             ->andFilterWhere(['like', 'cameFrom', $this->cameFrom])
-            ->andFilterWhere(['like', 'status', $this->status]);
+            ->andFilterWhere(['like', 'status', $this->status])
+            ->andFilterWhere(['like', 'category', $this->category]);
         return $dataProvider;
     }
 
@@ -136,6 +151,7 @@ class Notebook extends ActiveRecord
             'ready' => 'Готовность клиента',
             'cameFrom' => 'Тип контакта',
             'status' => 'Статус',
+            'category' => 'Товарная категория'
         ];
     }
 
