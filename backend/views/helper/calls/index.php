@@ -20,15 +20,17 @@ $this->params['breadcrumbs'][] = $this->title;
                         <th>Город</th>
                         <th>Телефон</th>
                         <th>Имя</th>
+                        <th>Менеджер</th>
                     </tr>
                     </thead>
                     <? foreach ($today as $data): ?>
                         <tr>
                             <td><?= Html::tag('span', '', ['class' => 'company-temp', 'style' => ['background-color' => $data->readyArr[$data->ready]['color']]])?></td>
-                            <td><?= Html::a($data->company, ['helper/notebook/view', 'id' => $data->id]) ?></td>
+                            <td><?= Html::a($data->company, ['helper/notebook/update', 'id' => $data->id]) ?></td>
                             <td><?= $data->city ?></td>
                             <td><?= $data->phone ?></td>
                             <td><?= $data->firstName.' '.$data->secondName.' '.$data->thirdName ?></td>
+                            <td><?= $data->managers->firstName ?></td>
                         </tr>
                     <? endforeach ?>
                 </table>
@@ -47,15 +49,17 @@ $this->params['breadcrumbs'][] = $this->title;
                         <th>Город</th>
                         <th>Телефон</th>
                         <th>Имя</th>
+                        <th>Менеджер</th>
                     </tr>
                     </thead>
                     <? foreach ($tomorrow as $data): ?>
                         <tr>
                             <td><?= Html::tag('span', '', ['class' => 'company-temp', 'style' => ['background-color' => $data->readyArr[$data->ready]['color']]])?></td>
-                            <td><?= Html::a($data->company, ['helper/notebook/view', 'id' => $data->id]) ?></td>
+                            <td><?= Html::a($data->company, ['helper/notebook/update', 'id' => $data->id]) ?></td>
                             <td><?= $data->city ?></td>
                             <td><?= $data->phone ?></td>
                             <td><?= $data->firstName.' '.$data->secondName.' '.$data->thirdName ?></td>
+                            <td><?= $data->managers->firstName ?></td>
                         </tr>
                     <? endforeach ?>
                 </table>
@@ -79,14 +83,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             <tr>
                                 <td>
                                     <?= Html::tag('span', '', ['class' => 'company-temp', 'style' => ['background-color' => $data->readyArr[$data->ready]['color'], 'margin' => '0px 10px 0px 30px']])?>
-                                    <?= Html::a($data->company, ['helper/notebook/view', 'id' => $data->id]) ?>
+                                    <?= Html::a($data->company, ['helper/notebook/update', 'id' => $data->id]) ?>
                                 </td>
                             </tr>
                         <? else: ?>
                             <tr>
                                 <td>
                                     <?= Html::tag('span', '', ['class' => 'company-temp', 'style' => ['background-color' => $data->readyArr[$data->ready]['color'], 'margin' => '0px 10px 0px 30px']])?>
-                                    <?= Html::a($data->company, ['helper/notebook/view', 'id' => $data->id]) ?>
+                                    <?= Html::a($data->company, ['helper/notebook/update', 'id' => $data->id]) ?>
                                 </td>
                             </tr>
                         <? endif ?>
@@ -112,16 +116,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         <th>Город</th>
                         <th>Телефон</th>
                         <th>Имя</th>
+                        <th>Менеджер</th>
                     </tr>
                     </thead>
                     <? foreach ($missed as $data): ?>
                         <tr>
                             <td><?= Yii::$app->formatter->asDatetime($data->callBack, "php:d-m-Y") ?></td>
                             <td><?= Html::tag('span', '', ['class' => 'company-temp', 'style' => ['background-color' => $data->readyArr[$data->ready]['color']]])?></td>
-                            <td><?= Html::a($data->company, ['helper/notebook/view', 'id' => $data->id]) ?></td>
+                            <td><?= Html::a($data->company, ['helper/notebook/update', 'id' => $data->id]) ?></td>
                             <td><?= $data->city ?></td>
                             <td><?= $data->phone ?></td>
                             <td><?= $data->firstName.' '.$data->secondName.' '.$data->thirdName ?></td>
+                            <td><?= $data->managers->firstName ?></td>
                         </tr>
                     <? endforeach ?>
                 </table>
