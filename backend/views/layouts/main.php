@@ -40,15 +40,6 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Вход', 'url' => ['/site/login']];
     } else {
-        if ($cookies->has('mode')){
-            $menuItems[] = [
-                'label' => 'Режим(CRM)', 'url' => ['/site/unset-mode'],
-            ];
-        }else{
-            $menuItems[] = [
-                'label' => 'Режим(Документы)', 'url' => ['/site/set-mode'],
-            ];
-        }
         $menuItems[] = [
             'label' => 'Выход (' . Yii::$app->user->identity->username . ')',
             'url' => ['/site/logout'],
@@ -59,6 +50,22 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
     ]);
+    ?>
+    <? if ($cookies->has('mode')): ?>
+        <div class="switch-container">
+            <span class="switch-txt swt-active">CRM</span>
+            <?= Html::a('', ['/site/unset-mode'], ['class' => 'switch-btn left']) ?>
+            <span class="switch-txt">Документы</span>
+        </div>
+    <? else: ?>
+        <div class="switch-container">
+            <span class="switch-txt">CRM</span>
+            <?= Html::a('', ['/site/set-mode'], ['class' => 'switch-btn right']) ?>
+            <span class="switch-txt swt-active">Документы</span>
+        </div>
+    <? endif ?>
+
+    <?
     NavBar::end();
     ?>
 
